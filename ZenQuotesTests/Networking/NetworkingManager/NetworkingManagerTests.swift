@@ -17,8 +17,7 @@ final class NetworkingManagerTests: XCTestCase {
 		url = URL(string: "https://zenquotes.io/api/quotes?")
 		let config = URLSessionConfiguration.ephemeral
 		config.protocolClasses = [MockURLSessionProtocol.self]
-		session = URLSession(configuration: config)
-		
+		session = URLSession(configuration: config)	
 	}
 	
 	override func tearDown() {
@@ -67,7 +66,7 @@ final class NetworkingManagerTests: XCTestCase {
 				XCTFail("Got the wrong type of error, expecting APIError")
 				return
 			}
-			XCTAssertEqual(networkingError, APIError.badResponse(statusCode: invalidStatusCode), "Returned error with status code \(invalidStatusCode)")
+			XCTAssertEqual(networkingError, APIError.invalidResponse(statusCode: invalidStatusCode), "Returned error with status code \(invalidStatusCode)")
 		}
 	}
 	
@@ -91,11 +90,10 @@ final class NetworkingManagerTests: XCTestCase {
 														 type: wrongTypeToParse)
 			XCTFail("Expected to fail when type mismatch")
 		} catch {
-			guard let _ = error as? DecodingError else {
-				XCTFail("Got the wrong type of error, expecting DecodingError")
+			guard case APIError.failedToDecode(_) = error else {
+				XCTFail("Got the wrong type of error, expecting APIError.failedToDecode")
 				return
 			}
-			XCTAssertEqual(error.localizedDescription, "The data couldn’t be read because it isn’t in the correct format.")
 		}
 	}
 	

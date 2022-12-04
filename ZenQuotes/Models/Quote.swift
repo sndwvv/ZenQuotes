@@ -7,12 +7,14 @@
 
 import Foundation
 
-struct Quote: Codable, Equatable {
+struct Quote: Codable, Equatable, Hashable {
 	let text: String
 	let author: String
+	let htmlBlock: String
 	
 	enum CodingKeys: String, CodingKey {
 		case text = "q"
 		case author = "a"
+		case htmlBlock = "h"
 	}
 }

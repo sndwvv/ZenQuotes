@@ -24,7 +24,7 @@ final class NetworkingManager: NetworkingManagerProtocol {
 						   endpoint: APIEndpoint,
 						   type: T.Type) async throws -> T {
 		guard let url = endpoint.url else {
-			throw APIError.badURL
+			throw APIError.invalidURL
 		}
 		var request = URLRequest(url: url)
 		request.httpMethod = endpoint.methodType.rawValue
@@ -43,11 +43,13 @@ final class NetworkingManager: NetworkingManagerProtocol {
 				decoder.keyDecodingStrategy = .convertFromSnakeCase
 				let decodedData = try decoder.decode(T.self, from: data)
 				return decodedData // :: SUCCESS :: //
+			} catch {
+				throw APIError.failedToDecode(error: error)
 			}
 		case 401:
 			throw APIError.unauthorized
 		default:
-			throw APIError.badResponse(statusCode: statusCode)
+			throw APIError.invalidResponse(statusCode: statusCode)
 		}
 	}
 	

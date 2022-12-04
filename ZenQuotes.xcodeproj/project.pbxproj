@@ -24,6 +24,8 @@
 		1EDE10CB293AAE6400B64384 /* NetworkingManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10CA293AAE6400B64384 /* NetworkingManagerTests.swift */; };
 		1EDE10CE293ABA3A00B64384 /* Quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 1EDE10CD293ABA3900B64384 /* Quotes.json */; };
 		1EDE10D0293ABE2000B64384 /* StaticJSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10CF293ABE2000B64384 /* StaticJSONMapper.swift */; };
+		1EDE10D3293B1C8B00B64384 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10D2293B1C8B00B64384 /* PersistenceController.swift */; };
+		1EDE10D9293C6C1B00B64384 /* Storage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10D7293C6C1B00B64384 /* Storage.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		1EDE10CA293AAE6400B64384 /* NetworkingManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerTests.swift; sourceTree = "<group>"; };
 		1EDE10CD293ABA3900B64384 /* Quotes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Quotes.json; sourceTree = "<group>"; };
 		1EDE10CF293ABE2000B64384 /* StaticJSONMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticJSONMapper.swift; sourceTree = "<group>"; };
+		1EDE10D2293B1C8B00B64384 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		1EDE10D8293C6C1B00B64384 /* Storage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Storage.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,9 +122,10 @@
 				1EDE10BA29390F0C00B64384 /* Views */,
 				1EDE10BD2939113600B64384 /* ViewModels */,
 				1EDE10B629390E6100B64384 /* API */,
+				1EDE10D1293B1C7500B64384 /* CoreData */,
 				1EDE10B929390EB400B64384 /* Models */,
 				1EDE10852934FEEB00B64384 /* Assets.xcassets */,
-				1EDE10CC293AB8EC00B64384 /* Resource */,
+				1EDE10CC293AB8EC00B64384 /* Resources */,
 				1EDE10872934FEEB00B64384 /* Preview Content */,
 			);
 			path = ZenQuotes;
@@ -220,13 +225,22 @@
 			path = NetworkingManager;
 			sourceTree = "<group>";
 		};
-		1EDE10CC293AB8EC00B64384 /* Resource */ = {
+		1EDE10CC293AB8EC00B64384 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				1EDE10CD293ABA3900B64384 /* Quotes.json */,
 				1EDE10CF293ABE2000B64384 /* StaticJSONMapper.swift */,
 			);
-			path = Resource;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1EDE10D1293B1C7500B64384 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1EDE10D2293B1C8B00B64384 /* PersistenceController.swift */,
+				1EDE10D7293C6C1B00B64384 /* Storage.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,7 +382,9 @@
 				1EDE10842934FEE800B64384 /* HomeView.swift in Sources */,
 				1EDE10C1293A8B4B00B64384 /* APIFetchState.swift in Sources */,
 				1EDE10AC29351AC000B64384 /* NetworkingManager.swift in Sources */,
+				1EDE10D3293B1C8B00B64384 /* PersistenceController.swift in Sources */,
 				1EDE10B2293909D900B64384 /* Quote.swift in Sources */,
+				1EDE10D9293C6C1B00B64384 /* Storage.xcdatamodeld in Sources */,
 				1EDE10822934FEE800B64384 /* ZenQuotesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,6 +727,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1EDE10D7293C6C1B00B64384 /* Storage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1EDE10D8293C6C1B00B64384 /* Storage.xcdatamodel */,
+			);
+			currentVersion = 1EDE10D8293C6C1B00B64384 /* Storage.xcdatamodel */;
+			path = Storage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1EDE10762934FEE800B64384 /* Project object */;
 }

@@ -8,14 +8,12 @@
 import Foundation
 
 enum APIError: Error, CustomStringConvertible {
-	case badURL
-	case noResponse
-	case badResponse(statusCode: Int)
-	case urlSession(URLError?)
-	case parsing(DecodingError?)
+	case invalidURL
+	case invalidResponse(statusCode: Int)
+	case failedToDecode(error: Error)
 	case unauthorized
-	case noData
-	case unknown
+	case invalidData
+	case noResponse
 	
 	var localizedDescription: String { // description for user
 		return "Sorry, something went wrong. Please try again."
@@ -23,25 +21,20 @@ enum APIError: Error, CustomStringConvertible {
 
 	var description: String { // description for developer
 		switch self {
-		case .unknown:
-			return "API ERROR: unknown error"
-		case .badURL:
+		case .invalidURL:
 			return "API ERROR: invalid URL"
-		case .urlSession(let error):
-			return "API ERROR: \(error?.localizedDescription ?? "url session error")"
-		case .noResponse:
-			return "API ERROR: no response"
-		case .badResponse(let statusCode):
+		case .invalidResponse(let statusCode):
 			return "API ERROR: bad response with status code \(statusCode)"
-		case .parsing(let error):
-			return "API ERROR: parsing error, \(error.debugDescription)"
+		case .failedToDecode(let error):
+			return "API ERROR: parsing error, \(error.localizedDescription)"
 		case .unauthorized:
 			return "API ERROR: unauthorized"
-		case .noData:
-			return "API ERROR: data returned nil"
+		case .invalidData:
+			return "API ERROR: invalid data"
+		case .noResponse:
+			return "API ERROR: HTTPURLResponse is nil"
 		}
 	}
-	
 
 }
 
@@ -49,21 +42,17 @@ extension APIError: Equatable {
 	
 	static func == (lhs: APIError, rhs: APIError) -> Bool {
 		switch (lhs, rhs) {
-		case (.badURL, .badURL):
+		case (.invalidURL, .invalidURL):
 			return true
-		case (.noResponse, .noResponse):
-			return true
-		case (.badResponse(let lhsType), .badResponse(let rhsType)):
+		case (.invalidResponse(let lhsType), .invalidResponse(let rhsType)):
 			return lhsType == rhsType
-		case (.urlSession(let lhsType), .urlSession(let rhsType)):
-			return lhsType?.localizedDescription == rhsType?.localizedDescription
-		case (.parsing(let lhsType), .parsing(let rhsType)):
-			return lhsType.debugDescription == rhsType.debugDescription
+		case (.failedToDecode(let lhsType), .failedToDecode(let rhsType)):
+			return lhsType.localizedDescription == rhsType.localizedDescription
 		case (.unauthorized, .unauthorized):
 			return true
-		case (.noData, .noData):
+		case (.invalidData, .invalidData):
 			return true
-		case (.unknown, .unknown):
+		case (.noResponse, .noResponse):
 			return true
 		default:
 			return false
