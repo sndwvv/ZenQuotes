@@ -26,6 +26,10 @@
 		1EDE10D0293ABE2000B64384 /* StaticJSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10CF293ABE2000B64384 /* StaticJSONMapper.swift */; };
 		1EDE10D3293B1C8B00B64384 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10D2293B1C8B00B64384 /* PersistenceController.swift */; };
 		1EDE10D9293C6C1B00B64384 /* Storage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10D7293C6C1B00B64384 /* Storage.xcdatamodeld */; };
+		1EDE10DF293D849B00B64384 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10DE293D849B00B64384 /* CardView.swift */; };
+		1EDE10E1293D87F100B64384 /* ScrollCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10E0293D87F100B64384 /* ScrollCardsView.swift */; };
+		1EDE10E72941624600B64384 /* QuotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10E62941624600B64384 /* QuotesListView.swift */; };
+		1EDE10E92945BBD500B64384 /* LikedQuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10E82945BBD500B64384 /* LikedQuotesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +72,10 @@
 		1EDE10CF293ABE2000B64384 /* StaticJSONMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticJSONMapper.swift; sourceTree = "<group>"; };
 		1EDE10D2293B1C8B00B64384 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		1EDE10D8293C6C1B00B64384 /* Storage.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Storage.xcdatamodel; sourceTree = "<group>"; };
+		1EDE10DE293D849B00B64384 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		1EDE10E0293D87F100B64384 /* ScrollCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollCardsView.swift; sourceTree = "<group>"; };
+		1EDE10E62941624600B64384 /* QuotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesListView.swift; sourceTree = "<group>"; };
+		1EDE10E82945BBD500B64384 /* LikedQuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedQuotesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +187,10 @@
 			isa = PBXGroup;
 			children = (
 				1EDE10832934FEE800B64384 /* HomeView.swift */,
+				1EDE10E82945BBD500B64384 /* LikedQuotesView.swift */,
+				1EDE10E62941624600B64384 /* QuotesListView.swift */,
+				1EDE10E0293D87F100B64384 /* ScrollCardsView.swift */,
+				1EDE10DE293D849B00B64384 /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -375,16 +387,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EDE10E92945BBD500B64384 /* LikedQuotesView.swift in Sources */,
 				1EDE10B829390E8300B64384 /* APIEndpoint.swift in Sources */,
+				1EDE10E1293D87F100B64384 /* ScrollCardsView.swift in Sources */,
 				1EDE10AE29351EAA00B64384 /* APIError.swift in Sources */,
 				1EDE10D0293ABE2000B64384 /* StaticJSONMapper.swift in Sources */,
 				1EDE10BF2939115D00B64384 /* HomeViewModel.swift in Sources */,
 				1EDE10842934FEE800B64384 /* HomeView.swift in Sources */,
 				1EDE10C1293A8B4B00B64384 /* APIFetchState.swift in Sources */,
+				1EDE10E72941624600B64384 /* QuotesListView.swift in Sources */,
 				1EDE10AC29351AC000B64384 /* NetworkingManager.swift in Sources */,
 				1EDE10D3293B1C8B00B64384 /* PersistenceController.swift in Sources */,
 				1EDE10B2293909D900B64384 /* Quote.swift in Sources */,
 				1EDE10D9293C6C1B00B64384 /* Storage.xcdatamodeld in Sources */,
+				1EDE10DF293D849B00B64384 /* CardView.swift in Sources */,
 				1EDE10822934FEE800B64384 /* ZenQuotesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

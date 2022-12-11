@@ -10,57 +10,57 @@ import SwiftUI
 struct HomeView: View {
 	
 	@Environment(\.managedObjectContext) var managedObjectContext
+	@FetchRequest(entity: LocalQuote.entity(), sortDescriptors: []) var localQuotes : FetchedResults<LocalQuote>
 	@StateObject var viewModel = HomeViewModel()
-	@FetchRequest(entity: LocalQuote.entity(), sortDescriptors: []) var results : FetchedResults<LocalQuote>
+	
+	private var unlikedQuotes: [LocalQuote] {
+		return localQuotes.filter { $0.isLiked == false }
+	}
 	
     var body: some View {
 		NavigationView {
 			VStack {
-				if results.isEmpty {
+				if unlikedQuotes.isEmpty {
 					if viewModel.quotes.isEmpty {
 						ProgressView()
 							.onAppear {
 								Task { do { await viewModel.fetchQuotes(context: managedObjectContext) }}
 							}
 					} else {
-						// Fetched from API
-						List(viewModel.quotes, id: \.self) { quote in
-							Text(quote.text)
-						}
+						// EMPTY VIEW
+						Text("Something went wrong.")
 					}
 				} else {
-					// Fetched from CoreData
-					List(results) { quote in
-						Text(quote.text ?? "")
-					}
+					ScrollCardsView(quotes: unlikedQuotes)
 				}
 			}
-			.navigationTitle(results.isEmpty ? "Fetched JSON" : "Fetched CoreData")
+			.navigationTitle(localQuotes.isEmpty ? "Fetched JSON" : "Fetched CoreData")
+			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button {
 						do {
-							results.forEach { quote in
+							unlikedQuotes.forEach { quote in
 								managedObjectContext.delete(quote)
 							}
 							try managedObjectContext.save()
+							Task { do { await viewModel.fetchQuotes(context: managedObjectContext) }}
 						} catch {
 							print(error.localizedDescription)
 						}
 						
 					} label: {
 						Image(systemName: "arrow.clockwise.circle")
-							.font(.title)
+							.font(.title3)
 					}
-
 				}
 			}
 		}
     }
 }
-//
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}

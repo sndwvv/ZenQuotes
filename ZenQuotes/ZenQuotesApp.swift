@@ -15,9 +15,21 @@ struct ZenQuotesApp: App {
 	
     var body: some Scene {
         WindowGroup {
-            HomeView()
-				.environment(\.managedObjectContext,
-							  persistenceController.container.viewContext)
+			TabView {
+				HomeView()
+					.environment(\.managedObjectContext,
+								  persistenceController.container.viewContext)
+					.tabItem {
+						Label("Home", systemImage: "house")
+					}
+				
+				LikedQuotesView()
+					.environment(\.managedObjectContext,
+								  persistenceController.container.viewContext)
+					.tabItem {
+						Label("Liked", systemImage: "heart")
+					}
+			}
         }
 		.onChange(of: scenePhase) { newScenePhase in
 			switch newScenePhase {
