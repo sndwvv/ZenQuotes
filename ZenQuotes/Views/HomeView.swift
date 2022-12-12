@@ -57,6 +57,7 @@ struct HomeView: View {
 			}
 		}
     }
+	
 }
 
 struct HomeView_Previews: PreviewProvider {

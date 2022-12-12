@@ -61,6 +61,7 @@ struct CardView: View {
 			.padding()
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(Color.green)
 		.padding(.horizontal, 20)
     }
 	

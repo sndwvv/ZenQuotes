@@ -13,7 +13,6 @@ final class HomeViewModel: ObservableObject {
 	private let networkingManager: NetworkingManagerProtocol
 	
 	@Published var fetchState: APIFetchState = .loading
-	// @Published var quoteText: String?
 	@Published var quotes: [Quote] = []
 	
 	init(networkingManager: NetworkingManagerProtocol = NetworkingManager.shared) {
@@ -23,13 +22,8 @@ final class HomeViewModel: ObservableObject {
 	func fetchQuotes(context: NSManagedObjectContext) async {
 		do {
 			let quotes: [Quote] = try await networkingManager.fetch(session: .shared,
-														   endpoint: .quotes,
-														   type: [Quote].self)
-//			guard let quote = quotes.first else {
-//				updateFetchState(state: .empty)
-//				return
-//			}
-//			updateQuoteText(text: quote.text)
+																	endpoint: .quotes,
+																	type: [Quote].self)
 			updateQuotes(quotes: quotes)
 			updateFetchState(state: .loaded)
 			saveQuotesData(quotes: quotes, context: context)
@@ -51,14 +45,6 @@ final class HomeViewModel: ObservableObject {
 			self.quotes = quotes
 		}
 	}
-	
-//	private func updateQuoteText(text: String) {
-//		DispatchQueue.main.async { [weak self] in
-//			guard let self = self else { return }
-//			self.quoteText = text
-//		}
-//	}
-	
 	
 	// MARK: - Save to Core Data
 	
