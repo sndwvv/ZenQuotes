@@ -26,14 +26,13 @@ struct ScrollCardsView: View {
 							CardView(quote: quote)
 						}
 						.frame(width: geometry.size.width, height: geometry.size.height)
-					}	
+					}
 				}
 				VStack {
 					Spacer()
 					Text("Count: \(quotes.count)")
 				}
 			}
-			
 		}
 		.onAppear {
 			UIScrollView.appearance().isPagingEnabled = true
