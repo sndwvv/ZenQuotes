@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E174CC62960F4CA006F1482 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E174CC52960F4CA006F1482 /* Color+Ext.swift */; };
+		1E174CC82962A9CD006F1482 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E174CC72962A9CD006F1482 /* CarouselView.swift */; };
 		1EDE10822934FEE800B64384 /* ZenQuotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10812934FEE800B64384 /* ZenQuotesApp.swift */; };
 		1EDE10842934FEE800B64384 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDE10832934FEE800B64384 /* HomeView.swift */; };
 		1EDE10862934FEEB00B64384 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EDE10852934FEEB00B64384 /* Assets.xcassets */; };
@@ -50,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E174CC52960F4CA006F1482 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		1E174CC72962A9CD006F1482 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		1EDE107E2934FEE800B64384 /* ZenQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EDE10812934FEE800B64384 /* ZenQuotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenQuotesApp.swift; sourceTree = "<group>"; };
 		1EDE10832934FEE800B64384 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -187,10 +191,11 @@
 			isa = PBXGroup;
 			children = (
 				1EDE10832934FEE800B64384 /* HomeView.swift */,
-				1EDE10E0293D87F100B64384 /* ScrollCardsView.swift */,
-				1EDE10E82945BBD500B64384 /* LikedQuotesView.swift */,
+				1E174CC72962A9CD006F1482 /* CarouselView.swift */,
 				1EDE10DE293D849B00B64384 /* CardView.swift */,
+				1EDE10E82945BBD500B64384 /* LikedQuotesView.swift */,
 				1EDE10E62941624600B64384 /* QuotesListView.swift */,
+				1EDE10E0293D87F100B64384 /* ScrollCardsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 		1EDE10CC293AB8EC00B64384 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1E174CC52960F4CA006F1482 /* Color+Ext.swift */,
 				1EDE10CD293ABA3900B64384 /* Quotes.json */,
 				1EDE10CF293ABE2000B64384 /* StaticJSONMapper.swift */,
 			);
@@ -394,8 +400,10 @@
 				1EDE10D0293ABE2000B64384 /* StaticJSONMapper.swift in Sources */,
 				1EDE10BF2939115D00B64384 /* HomeViewModel.swift in Sources */,
 				1EDE10842934FEE800B64384 /* HomeView.swift in Sources */,
+				1E174CC82962A9CD006F1482 /* CarouselView.swift in Sources */,
 				1EDE10C1293A8B4B00B64384 /* APIFetchState.swift in Sources */,
 				1EDE10E72941624600B64384 /* QuotesListView.swift in Sources */,
+				1E174CC62960F4CA006F1482 /* Color+Ext.swift in Sources */,
 				1EDE10AC29351AC000B64384 /* NetworkingManager.swift in Sources */,
 				1EDE10D3293B1C8B00B64384 /* PersistenceController.swift in Sources */,
 				1EDE10B2293909D900B64384 /* Quote.swift in Sources */,

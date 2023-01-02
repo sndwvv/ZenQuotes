@@ -12,9 +12,9 @@ struct QuotesListView: View {
 	var quotes: [LocalQuote]
 	
     var body: some View {
-		ScrollView(.vertical) {
+		List {
 			ForEach(quotes, id: \.self) { quote in
-				CardView(quote: quote)
+				Text(quote.text ?? "")
 			}
 		}
     }

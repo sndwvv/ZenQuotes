@@ -10,26 +10,32 @@ import SwiftUI
 struct CardView: View {
 	
 	@Environment(\.managedObjectContext) var managedObjectContext
+	
 	private var quote: LocalQuote
 	
+	@State private var showingDeleteAlert: Bool = false
+
 	init(quote: LocalQuote) {
 		self.quote = quote
+		
 	}
-	
-    var body: some View {
+
+	var body: some View {
 		VStack {
+			
+			// MARK: Quote Text
+			
 			VStack(alignment: .leading) {
 				HStack {
-					Text("\"")
-						.font(.system(size: 50))
-						.foregroundColor(.white)
-						.padding(.horizontal)
-						// .background(Color.gray)
-						.multilineTextAlignment(.leading)
-						
-					Spacer()
+//					Text("\(index)")
+//						.font(.system(size: 50))
+//						.foregroundColor(.white)
+//						.padding(.horizontal)
+//						.multilineTextAlignment(.leading)
+//
+//					Spacer()
 				}
-				
+
 				Text(quote.text ?? "")
 					.font(.title)
 					.frame(maxWidth: .infinity)
@@ -37,7 +43,8 @@ struct CardView: View {
 					.lineSpacing(4.0)
 					.padding(.horizontal)
 					.padding(.bottom, 20)
-					
+					.foregroundColor(.white)
+
 				Text(quote.author ?? "")
 					.font(.callout)
 					.frame(maxWidth: .infinity)
@@ -48,57 +55,82 @@ struct CardView: View {
 			.frame(maxWidth: .infinity)
 
 			
+			// MARK: Action Buttons 
+
 			HStack {
-				
 				Spacer()
-				
+
 				Button {
-					do {
-						managedObjectContext.delete(quote)
-						try managedObjectContext.save()
-					} catch {
-						print("failed to save")
-					}
+					showingDeleteAlert = true
 				} label: {
-					Label("Delete", systemImage: "delete.left")
+					// Image(systemName: "trash")
+					Label("Delete", systemImage: "trash")
 				}
+				.alert(isPresented: $showingDeleteAlert) {
+					deleteConfirmationAlert()
+				}
+				.foregroundColor(.blue)
 				.padding(12)
 				.overlay(
 					RoundedRectangle(cornerRadius: 10)
 						.stroke(Color.blue, lineWidth: 1)
 				)
-				
-				
+
 				Spacer()
-				
+
 				Button {
 					quote.isLiked.toggle()
-					do {
-						try managedObjectContext.save()
-					} catch {
-						print("failed to save")
-					}
+					saveQuoteToLikes()
 				} label: {
 					Label(quote.isLiked ? "Liked" : "Like",
 						  systemImage: quote.isLiked ? "heart.fill" : "heart")
 				}
+				.foregroundColor(.red)
 				.padding(12)
 				.overlay(
 					RoundedRectangle(cornerRadius: 10)
-						.stroke(Color.blue, lineWidth: 1)
+						.stroke(Color.red, lineWidth: 1)
 				)
-				
-				
+
 				Spacer()
 			}
 			.padding()
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.background(Color.gray)
-		.padding(20)
-    }
+		.background(Color.cardBackground)
+		.cornerRadius(10)
+		.shadow(radius: 10)
+	}
 	
+	// MARK: - Main Actions
+	
+	private func deleteConfirmationAlert() -> Alert {
+		let deleteAction = Alert.Button.destructive(Text("Delete")) {
+			do {
+				managedObjectContext.delete(quote)
+				try managedObjectContext.save()
+			} catch {
+				print("failed to save")
+			}
+		}
+		return Alert(
+			title: Text("Delete Quote"),
+			message: Text("Are you sure you want to delete this quote?"),
+			primaryButton: deleteAction,
+			secondaryButton: .cancel()
+		)
+	}
+	
+	private func saveQuoteToLikes() {
+		do {
+			try managedObjectContext.save()
+		} catch {
+			print("failed to save")
+		}
+	}
+
 }
+
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {

@@ -13,6 +13,8 @@ struct HomeView: View {
 	@FetchRequest(entity: LocalQuote.entity(), sortDescriptors: []) var localQuotes : FetchedResults<LocalQuote>
 	@StateObject var viewModel = HomeViewModel()
 	
+	@State private var currentIndex: Int = 0
+	
 	private var unlikedQuotes: [LocalQuote] {
 		return localQuotes.filter { $0.isLiked == false }
 	}
@@ -20,43 +22,66 @@ struct HomeView: View {
     var body: some View {
 		NavigationView {
 			VStack {
-				if unlikedQuotes.isEmpty {
-					if viewModel.quotes.isEmpty {
-						ProgressView()
-							.onAppear {
-								Task { do { await viewModel.fetchQuotes(context: managedObjectContext) }}
-							}
-					} else {
-						// EMPTY VIEW
-						Text("Something went wrong.")
-					}
+				if localQuotes.isEmpty {
+					ProgressView()
+						.onAppear {
+							fetchQuotesFromAPI()
+						}
 				} else {
-					ScrollCardsView(quotes: unlikedQuotes)
+					CarouselView(index: $currentIndex, items: unlikedQuotes, id: \.id) { quote, cardSize in
+						CardView(quote: quote)
+							.frame(width: cardSize.width, height: cardSize.height)
+						
+					}
+					.padding(.vertical, 50)
+					.background(Color.gray.opacity(0.25))
 				}
 			}
-			.navigationTitle(localQuotes.isEmpty ? "Fetched JSON" : "Fetched CoreData")
+			.navigationTitle(setNavigationTitle())
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing) {
-					Button {
-						do {
-							unlikedQuotes.forEach { quote in
-								managedObjectContext.delete(quote)
-							}
-							try managedObjectContext.save()
-							Task { do { await viewModel.fetchQuotes(context: managedObjectContext) }}
-						} catch {
-							print(error.localizedDescription)
-						}
-						
-					} label: {
-						Image(systemName: "arrow.clockwise.circle")
-							.font(.title3)
-					}
+					fetchMoreButton()
 				}
 			}
 		}
     }
+	
+	// MARK: ToolBar Actions
+	
+	private func setNavigationTitle() -> String {
+		if localQuotes.isEmpty {
+			return "Fetching Quotes ..."
+		} else {
+			return "All Quotes: \(unlikedQuotes.count)"
+		}
+	}
+	
+	private func fetchMoreButton() -> Button<Text> {
+		Button {
+			do {
+				localQuotes.forEach { quote in
+					managedObjectContext.delete(quote)
+				}
+				try managedObjectContext.save()
+			} catch {
+				print(error.localizedDescription)
+			}
+			
+		} label: {
+			Text("Delete All")
+		}
+	}
+	
+	// MARK: Fetch Quotes
+	
+	private func fetchQuotesFromAPI() {
+		Task {
+			do {
+				await viewModel.fetchQuotes(context: managedObjectContext)
+			}
+		}
+	}
 	
 }
 

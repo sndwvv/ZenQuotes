@@ -30,13 +30,13 @@ struct ScrollCardsView: View {
 				}
 				VStack {
 					Spacer()
-					Text("Count: \(quotes.count)")
+					Text("\(quotes.count)")
 				}
 			}
 		}
-		.onAppear {
-			UIScrollView.appearance().isPagingEnabled = true
-		}
+//		.onAppear {
+//			UIScrollView.appearance().isPagingEnabled = true
+//		}
     }
 	
 }

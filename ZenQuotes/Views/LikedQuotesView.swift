@@ -19,9 +19,9 @@ struct LikedQuotesView: View {
     var body: some View {
 		NavigationView {
 			VStack {
-				ScrollCardsView(quotes: likedQuotes)
+				QuotesListView(quotes: likedQuotes)
 			}
-			.navigationTitle("Liked Quotes")
+			.navigationTitle("Liked Quotes (\(likedQuotes.count))")
 			.navigationBarTitleDisplayMode(.inline)
 		}
     }

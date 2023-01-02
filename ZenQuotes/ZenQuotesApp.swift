@@ -20,9 +20,9 @@ struct ZenQuotesApp: App {
 					.environment(\.managedObjectContext,
 								  persistenceController.container.viewContext)
 					.tabItem {
-						Label("Home", systemImage: "house")
+						Label("All", systemImage: "message")
 					}
-				
+
 				LikedQuotesView()
 					.environment(\.managedObjectContext,
 								  persistenceController.container.viewContext)
